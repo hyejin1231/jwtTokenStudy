@@ -1,0 +1,7 @@
+
+jwt:
+  secretKey: 6/XhJr9v+SVANc/Uj0H8I15S7JY8If0QqpEqFIFFeM8=
+  access:
+    expired: 600000
+  refresh:
+    expired: 10080000
