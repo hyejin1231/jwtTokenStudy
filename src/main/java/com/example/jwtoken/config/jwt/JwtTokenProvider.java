@@ -27,6 +27,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,16 +42,14 @@ public class JwtTokenProvider
 	@Value("${jwt.refresh.expired}")
 	private long refreshTokenExpired;
 
-	@Value("${jwt.secretKey}")
-	private byte[] secretKey;
-
 	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 	private final Key key;
 
-	public JwtTokenProvider(AuthenticationManagerBuilder authenticationManagerBuilder)
+	public JwtTokenProvider(@Value("${jwt.secretKey}") String secretKey, AuthenticationManagerBuilder authenticationManagerBuilder)
 	{
 		this.authenticationManagerBuilder = authenticationManagerBuilder;
-		this.key = Keys.hmacShaKeyFor(secretKey);
+		byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+		this.key = Keys.hmacShaKeyFor(keyBytes);
 	}
 
 
