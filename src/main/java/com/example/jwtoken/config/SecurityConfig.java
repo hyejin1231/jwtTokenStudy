@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import com.example.jwtoken.common.JwtAuthenticationEntryPoint;
+import com.example.jwtoken.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.jwtoken.config.jwt.JwtAuthenticationFilter;
 import com.example.jwtoken.config.jwt.JwtTokenProvider;
 

@@ -1,6 +1,10 @@
 package com.example.jwtoken.config.jwt;
 
-import static com.example.jwtoken.common.JwtAuthErrorMessage.*;
+import static com.example.jwtoken.common.enums.JwtAuthErrorMessage.JTW_INVALID_TOKEN;
+import static com.example.jwtoken.common.enums.JwtAuthErrorMessage.JWT_AUTHENTICATION_NOT_VALID;
+import static com.example.jwtoken.common.enums.JwtAuthErrorMessage.JWT_CLAIMS_EMPTY;
+import static com.example.jwtoken.common.enums.JwtAuthErrorMessage.JWT_EXPIRED_TOKEN;
+import static com.example.jwtoken.common.enums.JwtAuthErrorMessage.JWT_UNSUPPORTED_TOKEN;
 
 import java.security.Key;
 import java.util.Arrays;
@@ -18,8 +22,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.example.jwtoken.common.JwtAuthCode;
-import com.example.jwtoken.common.JwtAuthErrorMessage;
+import com.example.jwtoken.common.enums.JwtAuthCode;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

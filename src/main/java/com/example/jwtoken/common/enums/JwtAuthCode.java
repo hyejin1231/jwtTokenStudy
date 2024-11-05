@@ -1,4 +1,4 @@
-package com.example.jwtoken.common;
+package com.example.jwtoken.common.enums;
 
 import lombok.Getter;
 

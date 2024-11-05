@@ -1,4 +1,4 @@
-package com.example.jwtoken.common;
+package com.example.jwtoken.config.jwt;
 
 import java.io.IOException;
 
