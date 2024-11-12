@@ -1,0 +1,11 @@
+### [로그인 성공테스트]
+POST http://localhost:8080/v1/login
+Content-Type: application/json
+
+{
+    "email" : "test123@test.com",
+    "password": "1234"
+}
+
+###
+GET  http://localhost:8080/v1/test

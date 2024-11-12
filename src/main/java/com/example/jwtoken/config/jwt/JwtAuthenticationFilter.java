@@ -31,8 +31,8 @@ public class JwtAuthenticationFilter extends GenericFilter
 			Authentication authentication = jwtTokenProvider.getAuthentication(jwtToken);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-			filterChain.doFilter(servletRequest, servletResponse);
 		}
+		filterChain.doFilter(servletRequest, servletResponse);
 	}
 
 	// Request Header에서 JWT 토큰 정보 추출

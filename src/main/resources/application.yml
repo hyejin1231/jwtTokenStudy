@@ -1,3 +1,26 @@
+spring:
+  profiles:
+    default: local
+
+  datasource:
+    url: jdbc:h2:mem:jwtoken
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true # (2.5~) Hibernate ??? ?? data.sql ??
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 jwt:
   secretKey: 6/XhJr9v+SVANc/Uj0H8I15S7JY8If0QqpEqFIFFeM8=
@@ -5,3 +28,5 @@ jwt:
     expired: 600000
   refresh:
     expired: 10080000
+
+

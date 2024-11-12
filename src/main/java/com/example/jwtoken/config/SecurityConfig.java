@@ -40,8 +40,10 @@ public class SecurityConfig
 	public Map<String, RequestMatcher> publicEndPointMatcher()
 	{
 		Map<String, RequestMatcher> requestMatcherMap = new HashMap<>();
-		requestMatcherMap.put("local", new OrRequestMatcher(
-				new AntPathRequestMatcher("/**/**")
+		requestMatcherMap.put("ALL", new OrRequestMatcher(
+				new AntPathRequestMatcher("/v1/login", "POST"),
+				new AntPathRequestMatcher("/h2-console/**/**")
+
 		));
 
 		return requestMatcherMap;
@@ -57,8 +59,10 @@ public class SecurityConfig
 				.csrf(AbstractHttpConfigurer::disable)
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-				.authorizeHttpRequests(auth -> auth.requestMatchers(
-						publicEndPointMatcher().get("local")).permitAll()
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers(
+								publicEndPointMatcher().get("ALL")
+						).permitAll()
 						.anyRequest().authenticated()
 				)
 				.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)

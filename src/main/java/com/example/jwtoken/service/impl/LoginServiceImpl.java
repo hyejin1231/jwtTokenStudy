@@ -26,11 +26,6 @@ public class LoginServiceImpl implements LoginService
 	{
 		User user = userRepository.findByEmail(loginReq.getEmail()).orElseThrow(InvalidLoginInformation::new);
 
-		boolean matches = passwordEncoder.matches(loginReq.getPassword(), user.getPassword());
-		if (!matches)
-		{
-			throw new InvalidLoginInformation();
-		}
 
 		return LoginRes.of(user);
 	}
