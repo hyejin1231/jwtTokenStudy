@@ -2,6 +2,9 @@ package com.example.jwtoken.common.res;
 
 import com.example.jwtoken.common.enums.ApiMessage;
 
+import lombok.Getter;
+
+@Getter
 public class ApiResponse
 {
 	private int status;

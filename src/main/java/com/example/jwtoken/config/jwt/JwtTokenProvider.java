@@ -7,6 +7,7 @@ import static com.example.jwtoken.common.enums.JwtAuthErrorMessage.JWT_EXPIRED_T
 import static com.example.jwtoken.common.enums.JwtAuthErrorMessage.JWT_UNSUPPORTED_TOKEN;
 
 import java.security.Key;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -126,6 +127,7 @@ public class JwtTokenProvider
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(id, password);
 
 		// authenticate 메서드를 통해 인증 검증 진행
+		// authenticate 메서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드 실행
 		authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
 		return authentication;
@@ -163,6 +165,12 @@ public class JwtTokenProvider
 	{
 		long now = new Date().getTime();
 		return new Date(now + expiredDuration);
+	}
+
+	public LocalDateTime getExpiredTime()
+	{
+		LocalDateTime now = LocalDateTime.now();
+		return now.plusSeconds(accessTokenExpired / 1000);
 	}
 
 	public boolean validateToken(String jwtToken)

@@ -1,12 +1,18 @@
 package com.example.jwtoken.service.impl;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.jwtoken.config.jwt.JwtTokenProvider;
 import com.example.jwtoken.dto.req.LoginReq;
+import com.example.jwtoken.dto.res.JwtTokenRes;
 import com.example.jwtoken.dto.res.LoginRes;
 import com.example.jwtoken.entity.User;
 import com.example.jwtoken.exception.InvalidLoginInformation;
+import com.example.jwtoken.exception.NoUserInformation;
 import com.example.jwtoken.repository.UserRepository;
 import com.example.jwtoken.service.LoginService;
 
@@ -19,14 +25,24 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginServiceImpl implements LoginService
 {
 	private final UserRepository userRepository;
-	private final PasswordEncoder passwordEncoder;
+	private final JwtTokenProvider jwtTokenProvider;
 
 	@Override
-	public LoginRes getUserInfoBy(LoginReq loginReq)
+	public JwtTokenRes getUserInfoBy(LoginReq loginReq)
 	{
-		User user = userRepository.findByEmail(loginReq.getEmail()).orElseThrow(InvalidLoginInformation::new);
 
+		Optional<User> user = userRepository.findByEmail(loginReq.getEmail());
 
-		return LoginRes.of(user);
+		if (user.isPresent())
+		{
+			User userInfo = user.get();
+			JwtTokenRes.builder()
+					.accessToken(jwtTokenProvider.generateAccessToken(jwtTokenProvider.setAuthentication(userInfo.getEmail(), userInfo.getPassword())))
+					.refreshToken(jwtTokenProvider.generateRefreshToken(userInfo.getEmail()))
+					.expiredTime(jwtTokenProvider.getExpiredTime().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
+					.email(userInfo.getEmail())
+					.build();
+		}
+		throw new NoUserInformation();
 	}
 }

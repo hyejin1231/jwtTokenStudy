@@ -2,7 +2,11 @@ package com.example.jwtoken.entity;
 
 import java.time.LocalDateTime;
 
+import com.example.jwtoken.common.enums.UserRole;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,14 +27,16 @@ public class User
 	private String email;
 	private String password;
 	private String name;
+	private String userRole;
 	private LocalDateTime createdAt;
 
 	@Builder
-	public User(String email, String password, String name)
+	public User(String email, String password, String name, String userRole)
 	{
 		this.email = email;
 		this.password = password;
 		this.name = name;
+		this.userRole = userRole;
 		this.createdAt = LocalDateTime.now();
 	}
 }

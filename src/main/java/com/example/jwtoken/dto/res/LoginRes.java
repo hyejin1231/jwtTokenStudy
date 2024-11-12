@@ -12,14 +12,16 @@ public class LoginRes
 	private String email;
 	private String password;
 	private String name;
+	private String userRole;
 
 	@Builder
-	public LoginRes(long userNo, String email, String password, String name)
+	public LoginRes(long userNo, String email, String password, String name, String userRole)
 	{
 		this.userNo = userNo;
 		this.email = email;
 		this.password = password;
 		this.name = name;
+		this.userRole = userRole;
 	}
 
 	public static LoginRes of(User user)
@@ -29,6 +31,7 @@ public class LoginRes
 				.email(user.getEmail())
 				.password(user.getPassword())
 				.name(user.getName())
+				.userRole(user.getUserRole())
 				.build();
 	}
 }

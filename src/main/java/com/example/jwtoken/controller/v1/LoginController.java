@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.jwtoken.common.res.ApiResponse;
 import com.example.jwtoken.controller.BaseController;
 import com.example.jwtoken.dto.req.LoginReq;
+import com.example.jwtoken.dto.res.JwtTokenRes;
 import com.example.jwtoken.dto.res.LoginRes;
 import com.example.jwtoken.service.LoginService;
 
@@ -28,9 +29,9 @@ public class LoginController extends BaseController
 	public ResponseEntity<ApiResponse> login(@RequestBody LoginReq req)
 	{
 		// TODO 유효성 검증 필요
-		LoginRes loginRes = loginService.getUserInfoBy(req);
-		log.info("[user login] userNo : {}, email : {}", loginRes.getUserNo(), loginRes.getEmail());
-		return resSuccess(loginRes);
+		JwtTokenRes jwtTokenRes = loginService.getUserInfoBy(req);
+		log.info("[user login] email : {}", jwtTokenRes.getEmail());
+		return resSuccess(jwtTokenRes);
 	}
 
 	@GetMapping("/test")
