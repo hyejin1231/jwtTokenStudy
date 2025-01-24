@@ -173,6 +173,11 @@ public class JwtTokenProvider
 		return now.plusSeconds(accessTokenExpired / 1000);
 	}
 
+	/**
+	 * JWT 토큰 검증
+	 * @param jwtToken
+	 * @return
+	 */
 	public boolean validateToken(String jwtToken)
 	{
 		try

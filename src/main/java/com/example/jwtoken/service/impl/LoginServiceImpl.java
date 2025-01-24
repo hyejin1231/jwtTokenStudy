@@ -36,13 +36,14 @@ public class LoginServiceImpl implements LoginService
 		if (user.isPresent())
 		{
 			User userInfo = user.get();
-			JwtTokenRes.builder()
+			return 	JwtTokenRes.builder()
 					.accessToken(jwtTokenProvider.generateAccessToken(jwtTokenProvider.setAuthentication(userInfo.getEmail(), userInfo.getPassword())))
 					.refreshToken(jwtTokenProvider.generateRefreshToken(userInfo.getEmail()))
 					.expiredTime(jwtTokenProvider.getExpiredTime().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")))
 					.email(userInfo.getEmail())
 					.build();
+		}else {
+			throw new NoUserInformation();
 		}
-		throw new NoUserInformation();
 	}
 }
