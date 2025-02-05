@@ -29,4 +29,10 @@ jwt:
   refresh:
     expired: 10080000
 
+kakao:
+  api_key: a521a7765e4b1eabca44928d9fc4e13b
+  redirect_uri: http://localhost:8080/v1/login/kakao
+  token_uri: https://kauth.kakao.com/oauth/token
+  info_uri : https://kapi.kakao.com/v2/user/me
+
 

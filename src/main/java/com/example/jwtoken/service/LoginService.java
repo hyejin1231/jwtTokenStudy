@@ -7,4 +7,5 @@ import com.example.jwtoken.dto.res.LoginRes;
 public interface LoginService
 {
 	JwtTokenRes getUserInfoBy(LoginReq loginReq);
+
 }

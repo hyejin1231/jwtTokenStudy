@@ -43,6 +43,7 @@ public class SecurityConfig
 		Map<String, RequestMatcher> requestMatcherMap = new HashMap<>();
 		requestMatcherMap.put("ALL", new OrRequestMatcher(
 				new AntPathRequestMatcher("/v1/login", "POST"),
+				new AntPathRequestMatcher("/v1/login/kakao", "GET"),
 				new AntPathRequestMatcher("/h2-console/**/**")
 		));
 

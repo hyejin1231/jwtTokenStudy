@@ -3,15 +3,12 @@ package com.example.jwtoken.service.impl;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.jwtoken.config.jwt.JwtTokenProvider;
 import com.example.jwtoken.dto.req.LoginReq;
 import com.example.jwtoken.dto.res.JwtTokenRes;
-import com.example.jwtoken.dto.res.LoginRes;
 import com.example.jwtoken.entity.User;
-import com.example.jwtoken.exception.InvalidLoginInformation;
 import com.example.jwtoken.exception.NoUserInformation;
 import com.example.jwtoken.repository.UserRepository;
 import com.example.jwtoken.service.LoginService;
