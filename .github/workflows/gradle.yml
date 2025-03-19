@@ -44,7 +44,7 @@ jobs:
     
     # ✅ 빌드된 JAR 파일을 GitHub Artifacts로 저장
     - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: build-output
         path: build/libs/*.jar
