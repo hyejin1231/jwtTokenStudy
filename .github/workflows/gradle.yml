@@ -28,6 +28,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    # ✅ Gradle 캐시 삭제 (Cache cleanup failed 해결)
+    - name: Remove Gradle Cache
+      run: rm -rf ~/.gradle/caches ~/.gradle/wrapper
+
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
