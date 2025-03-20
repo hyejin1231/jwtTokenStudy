@@ -38,7 +38,7 @@ public class LoginController extends BaseController
 	{
 		// TODO 유효성 검증 필요
 		JwtTokenRes jwtTokenRes = loginService.getUserInfoBy(req);
-		log.info("[user login] email !!!!: {}", jwtTokenRes.getEmail());
+		log.info("[user login] email !!!!!!!!!!!!: {}", jwtTokenRes.getEmail());
 		return resSuccess(jwtTokenRes);
 	}
 
