@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.example.jwtoken.common.enums.UserRole;
 
+import com.example.jwtoken.dto.req.SignupReq;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -38,5 +39,14 @@ public class User
 		this.name = name;
 		this.userRole = userRole;
 		this.createdAt = LocalDateTime.now();
+	}
+
+	public static User of(SignupReq signupReq) {
+		return User.builder()
+				.email(signupReq.getEmail())
+				.password(signupReq.getPassword())
+				.name(signupReq.getName())
+				.userRole("USER")
+				.build();
 	}
 }

@@ -1,5 +1,6 @@
 package com.example.jwtoken.controller;
 
+import com.example.jwtoken.common.enums.ApiMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
@@ -17,4 +18,12 @@ public class BaseController
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(ApiResponse.success(data));
 	}
+
+	protected ResponseEntity<ApiResponse> resOk(ApiMessage apiMessage) {
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(ApiResponse.success(apiMessage));
+	}
+
+
 }

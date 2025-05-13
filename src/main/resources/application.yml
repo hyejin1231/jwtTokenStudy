@@ -35,4 +35,8 @@ kakao:
   token_uri: https://kauth.kakao.com/oauth/token
   info_uri : https://kapi.kakao.com/v2/user/me
 
+# jasypt properties
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
 

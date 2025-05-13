@@ -10,6 +10,7 @@ public enum ApiMessage
 	UNAUTHORIZED(401, "유효하지 않은 인증"),
 	FORBIDDEN(403, "유효하지 않은 접근"),
 	NOT_FOUND(404, "찾을 수 없음"),
+	DUPLICATE(409, "중복"),
 	SERVER_ERROR(500, "서버 오류")
 	;
 

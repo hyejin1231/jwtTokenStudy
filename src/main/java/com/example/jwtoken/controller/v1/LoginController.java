@@ -1,8 +1,7 @@
 package com.example.jwtoken.controller.v1;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.example.jwtoken.common.enums.ApiMessage;
+import com.example.jwtoken.dto.req.SignupReq;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +15,9 @@ import com.example.jwtoken.common.util.KakaoApi;
 import com.example.jwtoken.controller.BaseController;
 import com.example.jwtoken.dto.req.LoginReq;
 import com.example.jwtoken.dto.res.JwtTokenRes;
-import com.example.jwtoken.dto.res.LoginRes;
 import com.example.jwtoken.entity.KakaoProfile;
 import com.example.jwtoken.service.LoginService;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +29,13 @@ public class LoginController extends BaseController
 {
 	private final LoginService loginService;
 	private final KakaoApi kakaoApi;
+
+	@GetMapping("/test")
+	public ResponseEntity<ApiResponse> test()
+	{
+		log.info("test");
+		return resSuccess(null);
+	}
 
 	@PostMapping("/login")
 	public ResponseEntity<ApiResponse> login(@RequestBody LoginReq req)
@@ -62,11 +66,15 @@ public class LoginController extends BaseController
 		return resSuccess(jwtTokenRes);
 	}
 
-	@GetMapping("/test")
-	public ResponseEntity<ApiResponse> test()
-	{
-		log.info("test");
-		return resSuccess(null);
+	@PostMapping("/signup")
+	public ResponseEntity<ApiResponse> signup(@RequestBody SignupReq req) {
+
+		if (loginService.getUserInfoBy(new LoginReq(req.getEmail(), req.getPassword())) == null) {
+			resOk(ApiMessage.DUPLICATE);
+		}
+
+		JwtTokenRes jwtTokenRes = loginService.signup(req);
+		return resSuccess(jwtTokenRes);
 	}
 
 }
